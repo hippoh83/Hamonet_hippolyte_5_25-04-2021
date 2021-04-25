@@ -1,0 +1,13 @@
+
+.header{
+    width:100%;
+    margin:0;
+}
+#navbarContent{
+    display:flex;
+    justify-content: flex-end;
+}
+.container-fluid{
+    box-shadow: inset 0px 0px 10px lightgrey;
+}
+
