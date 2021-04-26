@@ -13,36 +13,43 @@ document.addEventListener('DOMContentLoaded', ()=>{
     .then(function(value){
         render(value);
     })
-
     .catch(function(err){
-        console.log("échec lors de la récupération des données")
+        console.log(err)
     })
   }
 
 
 
         function render(value){
-    
-            for(let i=0; i<value.length; i++){
-                let val=value[i];
-            
+            for(const q of value){
+                //je récupere le container ou sera situé toutes les cards
+                const mainContainer = document.querySelector("#card");
+                //je crée tous les élements necessaires
+                const card = document.createElement("div");
+                const cardBody = document.createElement("div");
+                const img = document.createElement("img");
+                const header = document.createElement("h5");
+                const paragraph = document.createElement("p");
+                const price = document.createElement("h6");
+                const panier = document.createElement("a");
+                const hr = document.createElement('hr');
+                const span = document.createElement('span')
+                //j'ajoute les classes aux éléments
+                card.className = 'card';
+                cardBody.className = 'card-body text-center';
+                img.className = 'card';
+                paragraph.className = 'small mb-2';
+                price.className = 'mb-3';
+                panier.className = 'btn btn-primary btn-sm mr-1 mr-2';
+                span.className = 'text-danger mr-1'
+
+
+
+
                 //pour chaque élement de l'api (0 à 5), je crée une div avec les class card ou j'ajoute les élements contenu dans value
                 //j'ajoute d'abord les images en haut de la card
-                
                 //j'ajoute ensuite tous les elements dans le cardbody
-                let card = document
-                .querySelector("#card")
-                .append(document.createElement("div"))
-                .className('card')
-        
-                let valueimg=val.imgUrl;
-                let img=document
-                .createElement("img")
-                .className('card-img-top')
-                .src('my_function( " '+valueimg+' " )')
-                .setAttribute("alt", "image card oursons");
-                card.append(img);
-                //je crée les élements qui seront contenus dans ma card avec leurs classe respectives et renvoyant a la valeur de value[i]
+                //je crée les élements qui seront contenus dans ma card avec leurs classe respectives et renvoyant a la valeur de q
             }        
 
     }
