@@ -1,13 +1,18 @@
 
-.header{
-    width:100%;
-    margin:0;
-}
+
 #navbarContent{
     display:flex;
     justify-content: flex-end;
 }
-.container-fluid{
-    box-shadow: inset 0px 0px 10px lightgrey;
+.bg-light{
+    box-shadow: inset 0px -5px 10px lightgrey;
 }
 
+.jumbotron{
+    background-image: url("bear-1824882_1920.jpg");
+    background-size: cover;
+    color: white;
+    height:300px;
+   border-radius:0 !important;
+   
+}
