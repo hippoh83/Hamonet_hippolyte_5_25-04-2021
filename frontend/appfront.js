@@ -37,11 +37,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 //j'ajoute les classes aux éléments
                 card.className = 'card';
                 cardBody.className = 'card-body text-center';
-                img.className = 'card';
+                img.className = 'img-card-top';
                 paragraph.className = 'small mb-2';
                 price.className = 'mb-3';
                 panier.className = 'btn btn-primary btn-sm mr-1 mr-2';
-                span.className = 'text-danger mr-1'
+                span.className = 'text-danger mr-1';
+                //j'ajoute les élements de l'api
+                
 
 
 
