@@ -30,23 +30,33 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const img = document.createElement("img");
                 const header = document.createElement("h5");
                 const paragraph = document.createElement("p");
-                const price = document.createElement("h6");
-                const panier = document.createElement("a");
+                const price = document.createElement("a");
                 const hr = document.createElement('hr');
-                const span = document.createElement('span')
+                const span = document.createElement('span');
+                const euros = document.createElement('b');
                 //j'ajoute les classes aux éléments
-                card.className = 'card';
+                card.className = ' col-4 card shadow mx-3 mt-4 mb-3 px-0 border-light';
                 cardBody.className = 'card-body text-center';
+                header.className = 'card-title';
                 img.className = 'img-card-top';
-                paragraph.className = 'small mb-2';
-                price.className = 'mb-3';
-                panier.className = 'btn btn-primary btn-sm mr-1 mr-2';
-                span.className = 'text-danger mr-1';
+                img.setAttribute("height", "63%")
+                paragraph.className = 'card-text small mb-2';
+                price.setAttribute("href", "product.html")
+                price.className = 'mb-1 mt-4 stretched-link';
+                span.className = 'text-dark mr-1';
                 //j'ajoute les élements de l'api
-                
-
-
-
+                img.src = q.imageUrl;
+                img.setAttribute('alt', 'images oursons')
+                euros.innerHTML = '€';
+                header.innerHTML = q.name;
+                paragraph.innerHTML = q.description;
+                span.innerHTML = (q.price)/100 + " ";
+                //j'ajoute les élements les uns aux autres
+                span.append(euros)
+                price.append(span);
+                cardBody.append(header, hr, paragraph, hr, price);
+                card.append(img, cardBody);
+                mainContainer.append(card);
 
                 //pour chaque élement de l'api (0 à 5), je crée une div avec les class card ou j'ajoute les élements contenu dans value
                 //j'ajoute d'abord les images en haut de la card
@@ -60,8 +70,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
 fetchdata();
 })
    
-
 //une fonction qui ajoute la card sélectionnée en grand dans la page produit
+
+
+
 //une autre fonction qui ajoute le produit sélectionnée dans mon panier lorsqu'on appuie sur le bouton "ajouter au panier"
 // dans mon panier, les produits sélectionnée son sous la forme de card qui scroll de haut en bas,
 //On peut choisir le nombre de produit et le prix change en fonction

@@ -16,3 +16,14 @@
    border-radius:0 !important;
    
 }
+
+
+.card{
+    transition: transform 150ms ease-in;
+}
+.card a {
+    text-decoration: none;
+}
+.card:hover{
+transform: scale(1.02);
+}
