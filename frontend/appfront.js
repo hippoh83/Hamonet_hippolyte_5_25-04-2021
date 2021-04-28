@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const span = document.createElement('span');
                 const euros = document.createElement('b');
                 //j'ajoute les classes aux éléments
-                card.className = ' col-4 card shadow mx-3 mt-4 mb-3 px-0 border-light';
+                card.className = ' col-sm-4 card shadow mx-3 mt-4 mb-3 px-0 border-light';
                 cardBody.className = 'card-body text-center';
                 header.className = 'card-title';
-                img.className = 'img-card-top';
-                img.setAttribute("height", "63%")
+                img.className = 'img-card-top img-fluid w-100';
+                
                 paragraph.className = 'card-text small mb-2';
                 price.setAttribute("href", "product.html")
                 price.className = 'mb-1 mt-4 stretched-link';
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 paragraph.innerHTML = q.description;
                 span.innerHTML = (q.price)/100 + " ";
                 //j'ajoute les élements les uns aux autres
-                span.append(euros)
+                span.append(euros);
                 price.append(span);
                 cardBody.append(header, hr, paragraph, hr, price);
                 card.append(img, cardBody);
@@ -69,8 +69,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 fetchdata();
 })
+
+
    
 //une fonction qui ajoute la card sélectionnée en grand dans la page produit
+//je crée la div row et je crée la card avec les couleurs et ajouter au panier
+//le produit doit s'afficher selon l'id qui est appelé, pour chaque id appelé, 
+//selectionner les valeurs coorespondant a lid et les afficher
+//url request ????
 
 
 

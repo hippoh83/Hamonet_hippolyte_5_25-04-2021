@@ -4,7 +4,7 @@
     display:flex;
     justify-content: flex-end;
 }
-.bg-light{
+.light{
     box-shadow: inset 0px -5px 10px lightgrey;
 }
 
@@ -26,4 +26,8 @@
 }
 .card:hover{
 transform: scale(1.02);
+}
+.img-card-top{
+    height:45vh;
+    object-fit:cover;
 }
