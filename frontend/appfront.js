@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
             return res.json()
         }
     })
-    .then(function(value){
-        render(value);
+    .then(function(products){
+        render(products);
     })
     .catch(function(err){
         console.log(err)
@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 
 
-        function render(value){
-            for(const q of value){
+        function render(products){
+            for(const product of products){
                 //je récupere le container ou sera situé toutes les cards
                 const mainContainer = document.querySelector("#card");
                 //je crée tous les élements necessaires
@@ -35,22 +35,22 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const span = document.createElement('span');
                 const euros = document.createElement('b');
                 //j'ajoute les classes aux éléments
-                card.className = ' col-sm-4 card shadow mx-3 mt-4 mb-3 px-0 border-light';
+                card.className = ' col-sm-4 card shadow mx-3 mt-4 mb-3 px-0 border-light transition';
                 cardBody.className = 'card-body text-center';
                 header.className = 'card-title';
                 img.className = 'img-card-top img-fluid w-100';
                 
                 paragraph.className = 'card-text small mb-2';
-                price.setAttribute("href", "product.html")
+                price.setAttribute("href", "product.html?id="+product._id)
                 price.className = 'mb-1 mt-4 stretched-link';
                 span.className = 'text-dark mr-1';
                 //j'ajoute les élements de l'api
-                img.src = q.imageUrl;
+                img.src = product.imageUrl;
                 img.setAttribute('alt', 'images oursons')
                 euros.innerHTML = '€';
-                header.innerHTML = q.name;
-                paragraph.innerHTML = q.description;
-                span.innerHTML = (q.price)/100 + " ";
+                header.innerHTML = product.name;
+                paragraph.innerHTML = product.description;
+                span.innerHTML = (product.price)/100+',00' + " ";
                 //j'ajoute les élements les uns aux autres
                 span.append(euros);
                 price.append(span);
@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 
 fetchdata();
+
+
 })
 
 

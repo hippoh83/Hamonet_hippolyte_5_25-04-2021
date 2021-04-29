@@ -18,16 +18,27 @@
 }
 
 
-.card{
+.transition{
     transition: transform 150ms ease-in;
 }
 .card a {
     text-decoration: none;
 }
-.card:hover{
+.transition:hover{
 transform: scale(1.02);
 }
 .img-card-top{
     height:45vh;
     object-fit:cover;
+}
+
+.list-group-item{
+    transition: transform 150ms ease-in;
+    
+    
+}
+
+.list-group-item:hover{
+    transform: scale(1.2);
+    
 }
