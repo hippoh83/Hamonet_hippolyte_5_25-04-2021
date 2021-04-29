@@ -27,7 +27,7 @@ let code = params.get('id');
         const cardBody = document.createElement("div");     
         const header = document.createElement("h5");
         const paragraph = document.createElement("p");
-        const price = document.createElement("h6");
+        const price = document.createElement("h5");
         const hr1 = document.createElement('hr');
         const hr2 = document.createElement('hr');
         const span = document.createElement('span');
@@ -40,23 +40,26 @@ let code = params.get('id');
         const containerCard = document.createElement('div');
         const containerprice = document.createElement('div');
         const couleur =document.createElement('p')
+        const select = document.createElement('option');
     
     
-        img.className = 'card-img mx-0';
-        card.className = 'card mt-3 col-sm-12 px-0 bg-light shadow';
+        img.className = 'card-img mx-0 ';
+        card.className = 'card mt-3 col-sm-12 px-0 bg-light shadow mt-5';
         cardBody.className = 'card-body text-center mt-4';
         header.className = 'card-title';
         paragraph.className = 'card-text my-3';
-        couleur.className = 'card-text text-left';
-        price.className = 'mb-2 mt-4 mx-5';
+        couleur.className = 'card-text text-left mt-4';
+        price.className = 'mb-0 mt-2 mx-5';
         span.className = 'text-dark mr-1';
         containerImg.className = 'col-sm-7 mx-0';
         containerbody.className = 'col-sm-5';
         containerCard.className = 'row no-gutters wrap';
-        containerprice.className = 'row no-gutters justify-content-center my-3';
-        panier.className = 'btn btn-primary mx-5';
+        containerprice.className = 'row no-gutters wrap mb-4';
+        panier.className = 'btn btn-primary mx-0';
         panier.setAttribute('type', 'button');
-        ul.className ='list-group list-group-horizontal justify-content-center';
+        ul.className ='list-group justify-content-center d-flex flex-row flex-wrap ';
+        form.className = 'form-control col-sm-3 mx-2';
+        select.setAttribute('selected', '');
     
         img.src = items.imageUrl;
         img.setAttribute('alt', 'image ours');
@@ -65,25 +68,38 @@ let code = params.get('id');
         euros.innerHTML = '€';    
         paragraph.innerHTML = items.description;
         panier.innerHTML= "ajouter au panier";
-        span.innerHTML = (items.price)/100+',00' + " ";
+        
+        select.innerHTML = "Quantité";
 
         for(let i = 0; i<items.colors.length; i++){
            const color=items.colors[i];
            const li = document.createElement("li");
-           li.className ='list-group-item mx-1 px-5 py-3 border';
+           li.className ='list-group-item mx-1 px-5 py-3 mt-2 border col-sm-1';
            li.style.backgroundColor= color;
            ul.append(li);
         }
+        
+        for(let i = 1; i<=10; i++){
+           const option = document.createElement('option');
+           option.setAttribute('value',`${i}`);
+           option.innerHTML =`${i}`;
+           form.append(option);
+        }
+        span.innerHTML = ((items.price)/100)+',00' + " ";
+        
     
         span.append(euros);
         price.append(span);
-        containerprice.append(price, panier);
-        cardBody.append(header, paragraph, hr1, couleur, ul, hr2, containerprice);
+        form.append(select);
+        containerprice.append(form, price);
+        cardBody.append(header, paragraph, hr1, couleur, ul, hr2, containerprice, panier );
         containerbody.append(cardBody);
         containerImg.append(img);
         containerCard.append(containerImg, containerbody);
         card.append(containerCard);
-        mainProduct.append(card);    
+        mainProduct.append(card);   
+        
+
       }
 
       productdata();

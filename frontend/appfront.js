@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const span = document.createElement('span');
                 const euros = document.createElement('b');
                 //j'ajoute les classes aux éléments
-                card.className = ' col-sm-4 card shadow mx-3 mt-4 mb-3 px-0 border-light transition';
+                card.className = ' col-sm-5 card shadow mx-3 mt-4 mb-3 px-0 border-light transition';
                 cardBody.className = 'card-body text-center';
                 header.className = 'card-title';
                 img.className = 'img-card-top img-fluid w-100';
