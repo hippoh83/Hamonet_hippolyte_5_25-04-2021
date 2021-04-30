@@ -1,5 +1,12 @@
+
+//je recupere l'id dans l'url
+
 let params = new URLSearchParams(document.location.search);
 let code = params.get('id');
+
+
+//fetch des bonne svaleurs avec l'ajout de l'id
+
 
  function productdata(){
     fetch(`http://localhost:3000/api/teddies/${code}`)
@@ -21,7 +28,9 @@ let code = params.get('id');
 
     function product(items){
         const mainProduct = document.querySelector("#product");
-    
+
+    //je crée les élements necessaires
+
         const img = document.createElement("img");
         const card = document.createElement("div");
         const cardBody = document.createElement("div");     
@@ -42,7 +51,9 @@ let code = params.get('id');
         const couleur =document.createElement('p')
         const select = document.createElement('option');
     
-    
+    //..j'ajoute toutes les classes bootstraps
+
+
         img.className = 'card-img mx-0 ';
         card.className = 'card mt-3 col-sm-12 px-0 bg-light shadow mt-5';
         cardBody.className = 'card-body text-center mt-4';
@@ -59,8 +70,11 @@ let code = params.get('id');
         panier.setAttribute('type', 'button');
         ul.className ='list-group justify-content-center d-flex flex-row flex-wrap ';
         form.className = 'form-control col-sm-3 mx-2';
+        form.setAttribute('type', 'select');
         select.setAttribute('selected', '');
-    
+    //..puis les bonne valeurs
+
+
         img.src = items.imageUrl;
         img.setAttribute('alt', 'image ours');
         couleur.innerHTML = "Choisissez votre couleur :"
@@ -68,8 +82,10 @@ let code = params.get('id');
         euros.innerHTML = '€';    
         paragraph.innerHTML = items.description;
         panier.innerHTML= "ajouter au panier";
-        
+        span.innerHTML = ((items.price)/100)+',00' + " ";
         select.innerHTML = "Quantité";
+//je crée une boucle qui crée automatiquement les bonnes couleurs
+
 
         for(let i = 0; i<items.colors.length; i++){
            const color=items.colors[i];
@@ -78,19 +94,21 @@ let code = params.get('id');
            li.style.backgroundColor= color;
            ul.append(li);
         }
-        
+//une autre boucle pour ajouter un bouton de quantité  
+        form.append(select);
+
         for(let i = 1; i<=10; i++){
            const option = document.createElement('option');
            option.setAttribute('value',`${i}`);
            option.innerHTML =`${i}`;
            form.append(option);
         }
-        span.innerHTML = ((items.price)/100)+',00' + " ";
-        
-    
+
+
+//j'ajoute tous les élements entre eux pour créer la card
+
         span.append(euros);
         price.append(span);
-        form.append(select);
         containerprice.append(form, price);
         cardBody.append(header, paragraph, hr1, couleur, ul, hr2, containerprice, panier );
         containerbody.append(cardBody);
@@ -98,8 +116,19 @@ let code = params.get('id');
         containerCard.append(containerImg, containerbody);
         card.append(containerCard);
         mainProduct.append(card);   
-        
 
+
+//je crée un addeventlistener qui change le prix en fonction de la quantité selectionnée
+
+document.querySelector('.form-control').addEventListener('input',function(event){
+    const value = event.target.value;
+    span.innerHTML = ((items.price)/100)*value+',00' + " ";
+    span.append(euros);
+    if(value === "Quantité"){
+         span.innerHTML = ((items.price)/100)+',00' + " ";
+         span.append(euros); 
+    }
+} )
       }
-
+//j'appel la fonction
       productdata();
