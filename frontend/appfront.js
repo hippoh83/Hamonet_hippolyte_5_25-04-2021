@@ -74,17 +74,11 @@ fetchdata();
 
 
    
-//une fonction qui ajoute la card sélectionnée en grand dans la page produit
-//je crée la div row et je crée la card avec les couleurs et ajouter au panier
-//le produit doit s'afficher selon l'id qui est appelé, pour chaque id appelé, 
-//selectionner les valeurs coorespondant a lid et les afficher
-//url request ????
+
 
 
 
 //une autre fonction qui ajoute le produit sélectionnée dans mon panier lorsqu'on appuie sur le bouton "ajouter au panier"
-// dans mon panier, les produits sélectionnée son sous la forme de card qui scroll de haut en bas,
-//On peut choisir le nombre de produit et le prix change en fonction
 // une fonction qui vérifie les informations rentrée dans les forms
 //une fonction qui valide la commande et qui retourne l'id de notre commande
-// question retour sur l'id du produit si on ajoute plusieurs produit différent ? génération aléatoire ou aux choix une id ?
+

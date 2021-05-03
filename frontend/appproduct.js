@@ -120,15 +120,36 @@ let code = params.get('id');
 
 //je crée un addeventlistener qui change le prix en fonction de la quantité selectionnée
 
-document.querySelector('.form-control').addEventListener('input',function(event){
-    const value = event.target.value;
-    span.innerHTML = ((items.price)/100)*value+',00' + " ";
+window.addEventListener('input',function(event){
+   const value = event.target.value;
+   const newPrice= span.innerHTML = ((items.price)/100)*value+',00' + " ";
+   span.append(euros);
+    
     span.append(euros);
     if(value === "Quantité"){
          span.innerHTML = ((items.price)/100)+',00' + " ";
          span.append(euros); 
     }
+    
+    document.querySelector('.btn').addEventListener('click', function(){
+//je crée une classe qui contiens les produits (nom quantité, prix)
+//ensuite j'ajoute dans mon local storage en déclarant une variable i;(product, product[i]);
+
+        localStorage.setItem('name', `${items.name}`);
+        localStorage.setItem('quantité', `${value}`);
+        localStorage.setItem('price', `${newPrice}`);
+        
+    })
+    return newPrice;
+
 } )
+
+
+//Travail sur l'ajout des élements au panier
+//d'abord je crée mon local storage et j'ajoute les items (nom prix et quantité) quand on appuie sur panier
+//également, lorsqu'on on appuie sur panier, dans le header la quantité de produit s'affiche automatiquement
+
       }
 //j'appel la fonction
       productdata();
+
