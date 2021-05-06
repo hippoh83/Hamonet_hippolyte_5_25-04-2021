@@ -50,6 +50,11 @@ let code = params.get('id');
         const containerprice = document.createElement('div');
         const couleur =document.createElement('p')
         const select = document.createElement('option');
+        const panierselect = document.querySelector('.Panier');
+        const compteurpanier = document.createElement('div');
+        compteurpanier.className = 'justify-content-center';
+        panierselect.append(compteurpanier);
+
     
     //..j'ajoute toutes les classes bootstraps
 
@@ -97,7 +102,7 @@ let code = params.get('id');
 //une autre boucle pour ajouter un bouton de quantité  
         form.append(select);
 
-        for(let i = 1; i<=10; i++){
+        for(let i = 0; i<=10; i++){
            const option = document.createElement('option');
            option.setAttribute('value',`${i}`);
            option.innerHTML =`${i}`;
@@ -116,6 +121,7 @@ let code = params.get('id');
         containerCard.append(containerImg, containerbody);
         card.append(containerCard);
         mainProduct.append(card);   
+        
 
 
 //je crée un addeventlistener qui change le prix en fonction de la quantité selectionnée
@@ -131,19 +137,64 @@ window.addEventListener('input',function(event){
          span.append(euros); 
     }
     
+    
     document.querySelector('.btn').addEventListener('click', function(){
-//je crée une classe qui contiens les produits (nom quantité, prix)
-//ensuite j'ajoute dans mon local storage en déclarant une variable i;(product, product[i]);
+//je crée un objet vide et j'ajoute quand on clique un objet qui contiens les produits (nom quantité, prix)
+//test avec console.log() pour voir si mon objet fonctionne correctement
+//ensuite j'ajoute dans mon local storage en déclarant une variable i;(product, product[i]); peut etre ça marchera;
 
-        localStorage.setItem('name', `${items.name}`);
-        localStorage.setItem('quantité', `${value}`);
-        localStorage.setItem('price', `${newPrice}`);
-        
+panier.className = "btn btn-success mx-0";
+panier.innerHTML = "produit ajouté au panier !";
+
+
+
+    productinfo = {
+        nom : `${items.name}`,
+        prix : `${newPrice}`,
+        quantité : `${value}`
+    }
+    
+    
+
+localStorage.setItem(`${items.name}`, JSON.stringify(productinfo));
+
+
+//je dois calculer tout simpletement la quantité total dans le panier et renvoyer cette valeur dans l'inner html, cette valeur changera automatiquement 
+//et ca marchera nickel 
+//je crée un tableau qui contient toutes les quantités ajouté
+let quantités = [];
+for(let i = 0; i<localStorage.length; i++){
+   let objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
+   let value = parseInt(`${objects.quantité}`, 10);
+   quantités.push(value);
+   
+}
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+const quantitétotal = quantités.reduce(reducer, 0);
+compteurpanier.innerHTML = `${quantitétotal}` + " "+ "articles";
+
+
+
+//---création fonction 'prix total' : getallitem price = allitem.prix ++;
+
     })
+    
     return newPrice;
+    
 
 } )
 
+
+let quantités = [];
+for(let i = 0; i<localStorage.length; i++){
+   let objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
+   let value = parseInt(`${objects.quantité}`, 10);
+   quantités.push(value);
+   
+}
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+const quantitétotal = quantités.reduce(reducer, 0);
+compteurpanier.innerHTML = `${quantitétotal}` + " "+ "articles";;
 
 //Travail sur l'ajout des élements au panier
 //d'abord je crée mon local storage et j'ajoute les items (nom prix et quantité) quand on appuie sur panier
