@@ -102,7 +102,7 @@ let code = params.get('id');
 //une autre boucle pour ajouter un bouton de quantité  
         form.append(select);
 
-        for(let i = 0; i<=10; i++){
+        for(let i = 1; i<=10; i++){
            const option = document.createElement('option');
            option.setAttribute('value',`${i}`);
            option.innerHTML =`${i}`;
@@ -162,21 +162,21 @@ localStorage.setItem(`${items.name}`, JSON.stringify(productinfo));
 //je dois calculer tout simpletement la quantité total dans le panier et renvoyer cette valeur dans l'inner html, cette valeur changera automatiquement 
 //et ca marchera nickel 
 //je crée un tableau qui contient toutes les quantités ajouté
+function compteurPanier(){
 let quantités = [];
 for(let i = 0; i<localStorage.length; i++){
-   let objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
-   let value = parseInt(`${objects.quantité}`, 10);
+   const objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
+   const value = parseInt(`${objects.quantité}`, 10);
    quantités.push(value);
+   console.log(objects);
    
 }
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const quantitétotal = quantités.reduce(reducer, 0);
 compteurpanier.innerHTML = `${quantitétotal}` + " "+ "articles";
-
-
-
+}
+compteurPanier();
 //---création fonction 'prix total' : getallitem price = allitem.prix ++;
-
     })
     
     return newPrice;
@@ -184,7 +184,7 @@ compteurpanier.innerHTML = `${quantitétotal}` + " "+ "articles";
 
 } )
 
-
+function compteurPanier(){
 let quantités = [];
 for(let i = 0; i<localStorage.length; i++){
    let objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
@@ -194,13 +194,14 @@ for(let i = 0; i<localStorage.length; i++){
 }
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const quantitétotal = quantités.reduce(reducer, 0);
-compteurpanier.innerHTML = `${quantitétotal}` + " "+ "articles";;
-
+compteurpanier.innerHTML = `${quantitétotal}` +" "+ "articles";
+}
+compteurPanier();
 //Travail sur l'ajout des élements au panier
 //d'abord je crée mon local storage et j'ajoute les items (nom prix et quantité) quand on appuie sur panier
 //également, lorsqu'on on appuie sur panier, dans le header la quantité de produit s'affiche automatiquement
-
       }
 //j'appel la fonction
+      
       productdata();
 
