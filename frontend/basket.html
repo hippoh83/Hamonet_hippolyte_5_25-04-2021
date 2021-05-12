@@ -31,9 +31,9 @@
         </div>
     </div>
     <div class="container">
-        <div class="row px-1 my-5" >
-            <h1 class="title mb-4">Votre panier</h1>
-            <table class="table justify-content-center">
+        <div class="row my-5" >
+            <table class="table">
+                <h3 class="title mb-4 mx-3">Votre panier</h3>
                 <thead>
                     <tr class="text-center">
                         <th>
@@ -59,10 +59,36 @@
             </table>
 
         </div>
-        <div class="row justify-content-center" id="form">
-
+        <div class="row my-1" id="form">
+            <form class="col-sm-12">
+                <h3 class="title mb-4">Informations personnelles</h3>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="prénom" class="font-weight-bold">Prénom</label>
+                      <input type="text" class="form-control" id="prénom" placeholder="Votre prénom">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="Nom" class="font-weight-bold">Nom</label>
+                      <input type="text" class="form-control" id="Nom" placeholder="Votre nom">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputAddress" class="font-weight-bold">Adresse</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Votre adresse">
+                  </div>
+                  <div class="form-group">
+                    <label for="ville" class="font-weight-bold">Ville</label>
+                    <input type="text" class="form-control" id="ville" placeholder="Votre ville">
+                  </div>
+                  <div class="form-group">
+                    <label for="Email" class="font-weight-bold">Email</label>
+                    <input type="email" class="form-control" id="Email" placeholder="Nom@exemple.com">
+                  </div>
+                  <a href="confirm.html" type="submit" class="btn btn-primary col-sm-12 py-2 font-weight-bold">Commander</a>
+            </form>
         </div>
     </div>
+    
 
     
     

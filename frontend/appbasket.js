@@ -2,7 +2,9 @@
 //je recupere le container 
 let maincontainer = document.querySelector("#basket");
 
-for(let i = 0; i<localStorage.length; i++){
+
+
+for(let i = localStorage.length -1; i>=0; i--){
     //je crée mes élements du tableau
    const tr = document.createElement("tr");
    const tdname = document.createElement("td");
@@ -28,6 +30,7 @@ for(let i = 0; i<localStorage.length; i++){
    tdname.innerHTML =`${nom}`;
    tdquantity.innerHTML =`${quantité}`;
    tdprice.innerHTML =`${prix}`+" "+"€";
+
    button.append(icon);
    
    
@@ -52,13 +55,16 @@ document.querySelector("#emptybasket").addEventListener('click', function(){
 
 })
 
-document.querySelector(".btn").addEventListener('click', function(){
-    localStorage.clear()
+let removeButton = document.querySelectorAll(".btn");
+for(let i = 0; i<localStorage.length; i++){
+    removeButton[i].addEventListener('click', function(){
     let tr = document.querySelector(".remove").parentNode;
     tr.remove();
-
+    localStorage.removeItem(localStorage.key(i));
 })
+}
 
+// j'ajoute un prix total a mon tableau apres il lme reste a faire formulaire et confirmation de commande je dois finir dimanche avec les problemes
 
 
 

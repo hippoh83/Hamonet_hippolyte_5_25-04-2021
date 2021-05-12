@@ -169,7 +169,7 @@ for(let i = 0; i<localStorage.length; i++){
    const value = parseInt(`${objects.quantité}`, 10);
    quantités.push(value);
    console.log(objects);
-   
+
 }
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const quantitétotal = quantités.reduce(reducer, 0);
