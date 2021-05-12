@@ -19,18 +19,21 @@ for(let i = localStorage.length -1; i>=0; i--){
    
    
    
+   
+   
 
    // je recupere les données a mettre dans mon tableau
    let objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
    let quantité = parseInt(`${objects.quantité}`, 10);
    let prix = parseInt(`${objects.prix}`, 10);
    let nom = `${objects.nom}`;
+   let id = objects.id;
 
    //j'ajoute mes données
    tdname.innerHTML =`${nom}`;
    tdquantity.innerHTML =`${quantité}`;
    tdprice.innerHTML =`${prix}`+" "+"€";
-
+   button.setAttribute("value", id);
    button.append(icon);
    
    
@@ -56,18 +59,37 @@ document.querySelector("#emptybasket").addEventListener('click', function(){
 })
 
 let removeButton = document.querySelectorAll(".btn");
-for(let i = 0; i<localStorage.length; i++){
-    removeButton[i].addEventListener('click', function(){
+for(let i = 0; i<removeButton.length; i++){
+    const ids = removeButton[i].getAttribute("value");
+    removeButton[i].addEventListener('click', () => {
     let tr = document.querySelector(".remove").parentNode;
     tr.remove();
-    localStorage.removeItem(localStorage.key(i));
+    localStorage.removeItem(ids);
 })
 }
 
 // j'ajoute un prix total a mon tableau apres il lme reste a faire formulaire et confirmation de commande je dois finir dimanche avec les problemes
 
 
+document.querySelector('#prénom').addEventListener("input", function(e){
+    let value = e.target.value;
+    if(/[^A-Za-zÀ-ȕ-]/g.test(value)){
+        document.querySelector('#prénom').className="form-control border-danger";
+    }
+    else{
+        document.querySelector('#prénom').className="form-control border-success";
 
+    }
+})
+document.querySelector('#Nom').addEventListener("input", function(e){
+    let value = e.target.value;
+    if(/[^A-Za-zÀ-ȕ-]/g.test(value)){
+        document.querySelector('#Nom').className="form-control border-danger";
+    }else{
+        document.querySelector('#Nom').className="form-control border-success";
+
+    }
+})
 
 
 
@@ -83,8 +105,6 @@ function compteurPanier(){
        const objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
        const value = parseInt(`${objects.quantité}`, 10);
        quantités.push(value);
-       
-       
     }
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     const quantitétotal = quantités.reduce(reducer, 0);

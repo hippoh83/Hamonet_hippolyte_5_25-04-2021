@@ -149,6 +149,7 @@ panier.innerHTML = "produit ajouté au panier !";
 
 
     productinfo = {
+        id : `${items._id}`,
         nom : `${items.name}`,
         prix : `${newPrice}`,
         quantité : `${value}`
@@ -156,7 +157,7 @@ panier.innerHTML = "produit ajouté au panier !";
     
     
 
-localStorage.setItem(`${items.name}`, JSON.stringify(productinfo));
+localStorage.setItem(`${items._id}`, JSON.stringify(productinfo));
 
 
 //je dois calculer tout simpletement la quantité total dans le panier et renvoyer cette valeur dans l'inner html, cette valeur changera automatiquement 
