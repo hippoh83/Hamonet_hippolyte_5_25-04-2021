@@ -14,7 +14,7 @@ for(let i = localStorage.length -1; i>=0; i--){
    const button = document.createElement("button");
    const icon = document.createElement("i");
    icon.className = "bi bi-x";
-   button.className = "btn btn-light border" ;
+   button.className = "btn btn-light border removebutton" ;
    tdremove.className = "remove"
    
    
@@ -58,11 +58,12 @@ document.querySelector("#emptybasket").addEventListener('click', function(){
 
 })
 
-let removeButton = document.querySelectorAll(".btn");
+let removeButton = document.querySelectorAll(".removebutton");
 for(let i = 0; i<removeButton.length; i++){
-    const ids = removeButton[i].getAttribute("value");
+    
     removeButton[i].addEventListener('click', () => {
-    let tr = document.querySelector(".remove").parentNode;
+    const ids = removeButton[i].getAttribute("value");
+    let tr = removeButton[i].parentNode.parentNode;
     tr.remove();
     localStorage.removeItem(ids);
 })
@@ -70,14 +71,17 @@ for(let i = 0; i<removeButton.length; i++){
 
 // j'ajoute un prix total a mon tableau apres il lme reste a faire formulaire et confirmation de commande je dois finir dimanche avec les problemes
 
-
+let formvalidation = {
+    value : false
+};
+console.log(formvalidation);
 document.querySelector('#prénom').addEventListener("input", function(e){
     let value = e.target.value;
     if(/[^A-Za-zÀ-ȕ-]/g.test(value)){
         document.querySelector('#prénom').className="form-control border-danger";
-    }
-    else{
-        document.querySelector('#prénom').className="form-control border-success";
+        formvalidation.value = false;
+        
+        
 
     }
 })
@@ -85,9 +89,22 @@ document.querySelector('#Nom').addEventListener("input", function(e){
     let value = e.target.value;
     if(/[^A-Za-zÀ-ȕ-]/g.test(value)){
         document.querySelector('#Nom').className="form-control border-danger";
+        formvalidation.value = false;
+        Object.freeze(formvalidation);
+        
     }else{
         document.querySelector('#Nom').className="form-control border-success";
+        formvalidation.value = true;
 
+    }
+})
+
+document.querySelector(".submitbutton").addEventListener("click", function(event){
+    if(formvalidation === true){
+        return true
+    }else{
+        alert("veuillez correctement remplir le formulaire");
+        event.preventDefault();
     }
 })
 
