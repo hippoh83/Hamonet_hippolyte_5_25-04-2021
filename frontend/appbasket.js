@@ -1,9 +1,9 @@
-//je recupere les elements du local storage et je les places dans mon div basket, sous quel forme ? tableau, ul, div..
+//je recupere les elements du local storage et je les places dans mon div basket
 //je recupere le container 
 let maincontainer = document.querySelector("#basket");
 
 
-
+//je créee les élements de mon tableau produit
 for(let i = localStorage.length -1; i>=0; i--){
     //je crée mes élements du tableau
    const tr = document.createElement("tr");
@@ -45,7 +45,7 @@ maincontainer.append(tr);
 
 }
 
-
+//j'ajoute une fonctionnalité pour supprimer tout le panier ou seulement un par un 
 document.querySelector("#emptybasket").addEventListener('click', function(){
 
     localStorage.clear();
@@ -57,7 +57,6 @@ document.querySelector("#emptybasket").addEventListener('click', function(){
     }
 
 })
-
 let removeButton = document.querySelectorAll(".removebutton");
 for(let i = 0; i<removeButton.length; i++){
     
@@ -69,9 +68,7 @@ for(let i = 0; i<removeButton.length; i++){
 })
 }
 
-// j'ajoute un prix total a mon tableau apres il lme reste a faire formulaire et confirmation de commande je dois finir dimanche avec les problemes
-
-
+//je crée une fonction qui sert de validation pour m'assurer que chaque rentrée est correcte
 function validation(){
     
     let regPrenom = /[^A-Za-zÀ-ȕ-]/g.test(document.querySelector('#prénom').value);
@@ -119,6 +116,17 @@ function validation(){
 }
 
 
+
+
+
+
+
+
+
+
+
+//j'ajoute les fonctionnalité quand on appuie sur le bouton commander(validation + envoie des données sous forme de tableau et objets+
+//+envoie sur la page confirmation de la commande)
 document.querySelector(".submitbutton").addEventListener("click", function(event){
     if(validation() === true){
         return true
@@ -131,7 +139,7 @@ document.querySelector(".submitbutton").addEventListener("click", function(event
 
 
 
-
+//ma fonction compteur panier présente sur toutes les pages pour pouvoir toujours savoir combien d'élement sont dans le panier
 const panierselect = document.querySelector('.Panier');
         const compteurpanier = document.createElement('div');
         compteurpanier.className = 'justify-content-center';
@@ -149,13 +157,10 @@ function compteurPanier(){
     }
     compteurPanier();
 
-//j'ajoute un élement de croix qui supprime un élément du panier, au mieux on peut supprimer une quantité au lieux de tout supprimer d'un coup
-//avec localstorage.removeitem
 
 
 
 
 
-//-----------une fois que j'ai géré le panier je crée mes formes en bootstraps, nom prenom adresse email; je les valide avec des regex
-//----------- je  créee une condition qui valide le formulaire, si validé appel la classe qui valide, sinon non validé renvoie 
-//----------- la classe qui ajoute des borders rouges et une indication : (ex: le prénom doit contenir que des lettres, l'adresse email doit avoir un format precis)
+
+
