@@ -71,39 +71,59 @@ for(let i = 0; i<removeButton.length; i++){
 
 // j'ajoute un prix total a mon tableau apres il lme reste a faire formulaire et confirmation de commande je dois finir dimanche avec les problemes
 
-let formvalidation = {
-    value : false
-};
-console.log(formvalidation);
-document.querySelector('#prénom').addEventListener("input", function(e){
-    let value = e.target.value;
-    if(/[^A-Za-zÀ-ȕ-]/g.test(value)){
-        document.querySelector('#prénom').className="form-control border-danger";
-        formvalidation.value = false;
-        
-        
 
+function validation(){
+    
+    let regPrenom = /[^A-Za-zÀ-ȕ-]/g.test(document.querySelector('#prénom').value);
+    let regNom = /[^A-Za-zÀ-ȕ-]/g.test(document.querySelector('#Nom').value);
+    let regAddress= /[^A-Za-zÀ-ȕ0-9-'\s]/g.test(document.querySelector('#inputAddress').value);
+    let regVille=  /[^A-Za-zÀ-ȕ0-9-\s]/g.test(document.querySelector('#ville').value);
+    let regEmail = !(/^.+@.+\..+$/.test(document.querySelector('#Email').value));
+   
+    if(regPrenom){
+        let  errormsg = document.createElement("small");
+        errormsg.className="form-text text-danger";
+        errormsg.innerHTML="Ce champ ne doit pas contenir de caractères spéciaux.";
+        document.querySelector('#prénom').className="form-control border-danger text-danger";
+        document.querySelector('#prénom').insertAdjacentElement('afterend', errormsg);
     }
-})
-document.querySelector('#Nom').addEventListener("input", function(e){
-    let value = e.target.value;
-    if(/[^A-Za-zÀ-ȕ-]/g.test(value)){
-        document.querySelector('#Nom').className="form-control border-danger";
-        formvalidation.value = false;
-        Object.freeze(formvalidation);
-        
-    }else{
-        document.querySelector('#Nom').className="form-control border-success";
-        formvalidation.value = true;
+    if(regNom){
+        let  errormsg = document.createElement("small");
+        errormsg.className="form-text text-danger";
+        errormsg.innerHTML="Ce champ ne doit pas contenir de caractères spéciaux.";
+        document.querySelector('#Nom').className="form-control border-danger text-danger";
+        document.querySelector('#Nom').insertAdjacentElement('afterend', errormsg);
+    }
+    if(regAddress){
+        let  errormsg = document.createElement("small");
+        errormsg.className="form-text text-danger";
+        errormsg.innerHTML="Veuillez rentrer une adresse valide.";
+        document.querySelector('#inputAddress').className="form-control border-danger text-danger";
+        document.querySelector('#inputAddress').insertAdjacentElement('afterend', errormsg);
+    }
+    if(regVille){
+        let  errormsg = document.createElement("small");
+        errormsg.className="form-text text-danger";
+        errormsg.innerHTML="Veuillez rentrer votre ville et le code postal.";
+        document.querySelector('#ville').className="form-control border-danger text-danger";
+        document.querySelector('#ville').insertAdjacentElement('afterend', errormsg);
+    }
+    if(regEmail){
+        let  errormsg = document.createElement("small");
+        errormsg.className="form-text text-danger";
+        errormsg.innerHTML="L'adresse Email doit avoir un format valide 'Nom@exemple.com'.";
+        document.querySelector('#Email').className="form-control border-danger text-danger";
+        document.querySelector('#Email').insertAdjacentElement('afterend', errormsg);
+    }
+     return !(regPrenom||regVille||regAddress||regEmail||regNom);
+}
 
-    }
-})
 
 document.querySelector(".submitbutton").addEventListener("click", function(event){
-    if(formvalidation === true){
+    if(validation() === true){
         return true
     }else{
-        alert("veuillez correctement remplir le formulaire");
+        
         event.preventDefault();
     }
 })
