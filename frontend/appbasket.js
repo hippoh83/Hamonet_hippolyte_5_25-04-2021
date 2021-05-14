@@ -15,13 +15,8 @@ for(let i = localStorage.length -1; i>=0; i--){
    const icon = document.createElement("i");
    icon.className = "bi bi-x";
    button.className = "btn btn-light border removebutton" ;
-   tdremove.className = "remove"
+   tdremove.className = "remove";
    
-   
-   
-   
-   
-
    // je recupere les données a mettre dans mon tableau
    let objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
    let quantité = parseInt(`${objects.quantité}`, 10);
@@ -36,27 +31,33 @@ for(let i = localStorage.length -1; i>=0; i--){
    button.setAttribute("value", id);
    button.append(icon);
    
-   
 //j'ajoute les données
 tdremove.append(button);
 tr.append(tdname, tdquantity, tdprice, tdremove);
 maincontainer.append(tr);
 
-
 }
+//ajout prix total panier
+let prixtotal =[];
+for(let i = 0; i<localStorage.length; i++){
+    const objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    const prixvalue = parseInt(`${objects.prix}`, 10);
+    prixtotal.push(prixvalue);
+ }
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+const total = prixtotal.reduce(reducer, 0);
 
-//j'ajoute une fonctionnalité pour supprimer tout le panier ou seulement un par un 
-document.querySelector("#emptybasket").addEventListener('click', function(){
+let affichageprix = document.createElement("tr");
+affichageprix.className="border";
+let tdprixt = document.createElement("td");
+tdprixt.className="text-center font-weight-bold";
+tdprixt.setAttribute("colspan", "4");
+tdprixt.innerHTML=`Prix total : ${total} €`;
+affichageprix.append(tdprixt)
+maincontainer.insertAdjacentElement('beforeend', affichageprix);    
 
-    localStorage.clear();
-    let tbody = document.querySelector("tbody")
-    let alltr = document.querySelector("tbody tr");
-    for (alltr in tbody){
-    let alltr = document.querySelector("tbody tr");
-    alltr.remove();
-    }
+//j'ajoute une fonctionnalité pour supprimer les élements du panier
 
-})
 let removeButton = document.querySelectorAll(".removebutton");
 for(let i = 0; i<removeButton.length; i++){
     
@@ -68,7 +69,7 @@ for(let i = 0; i<removeButton.length; i++){
 })
 }
 
-//je crée une fonction qui sert de validation pour m'assurer que chaque rentrée est correcte
+//je crée une fonction qui sert de validation pour m'assurer que chaque entrée est correcte
 function validation(){
     
     let regPrenom = /[^A-Za-zÀ-ȕ-]/g.test(document.querySelector('#prénom').value);
@@ -101,7 +102,7 @@ function validation(){
     if(regVille){
         let  errormsg = document.createElement("small");
         errormsg.className="form-text text-danger";
-        errormsg.innerHTML="Veuillez rentrer votre ville et le code postal.";
+        errormsg.innerHTML="Veuillez rentrer une ville existante.";
         document.querySelector('#ville').className="form-control border-danger text-danger";
         document.querySelector('#ville').insertAdjacentElement('afterend', errormsg);
     }
@@ -115,23 +116,35 @@ function validation(){
      return !(regPrenom||regVille||regAddress||regEmail||regNom);
 }
 
-
-
-
-
-
-
-
-
-
-
 //j'ajoute les fonctionnalité quand on appuie sur le bouton commander(validation + envoie des données sous forme de tableau et objets+
 //+envoie sur la page confirmation de la commande)
 document.querySelector(".submitbutton").addEventListener("click", function(event){
+
     if(validation() === true){
-        return true
+        //si la validation est validée, je crée un objet contenant les élements utilisateurs
+        let contact = {
+            firstName : document.getElementById('prénom').value,
+            lastName : document.getElementById('Nom').value,
+            address : document.getElementById('inputAddress').value,
+            city : document.getElementById('ville').value,
+            email : document.getElementById('Email').value
+        };
+        //de même, je crée un tableau récupérant les données du localStorage
+        let produits = [];
+        for (const [key, value] of Object.entries(localStorage)) {
+            let products = `${key}: ${value}`;
+            produits.push(products);
+            }
+        //je crée une order_id qui sera renvoyé  au serveur et sur la page confirmation de commande
+        let order_id = function () {
+            return '_' + Math.random().toString(36).substr(2, 9);
+            }
+
+        //j'ai plus qu'a poster mes trois élements au serveur (objets, tableau et order_id)
+
+        event.preventDefault();
     }else{
-        
+        document.forms[0].reset();
         event.preventDefault();
     }
 })
