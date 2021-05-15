@@ -140,24 +140,29 @@ document.querySelector(".submitbutton").addEventListener("click", function(event
             return '_' + Math.random().toString(36).substr(2, 9);
             };
         //j'ai plus qu'a poster mes trois élements au serveur (objets, tableau et order_id)
-        event.preventDefault();
+        function send(){
             fetch("http://localhost:3000/api/teddies/order", {
-            method: "post",
-            body: JSON.stringify({information: contact, produits: products, order: order_id()}),
+            method: "POST",
             headers:{
-            'Accept': 'application/json', 
-            "Content-type": "application/json;charset=UTF-8"
-            }
+                "accept": "application/json",
+                "Content-type": "application/json"
+                },
+            body: JSON.stringify({contact : contact, products : products, orderID: order_id()})
           })
-            .then(res => res.json())
-            .then(json => console.log(json))
-            .catch(err => console.log(err));
-            
+            .then(function(response){
+               console.log(response);
+               return response.json()
+            })
+            .catch(err => console.log(err))
+        }
+        send();
+        event.preventDefault();
         
     }else{
         document.forms[0].reset();
         event.preventDefault();
     }
+    
 })
 
 
