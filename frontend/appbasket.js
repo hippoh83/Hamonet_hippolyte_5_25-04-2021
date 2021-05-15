@@ -128,21 +128,32 @@ document.querySelector(".submitbutton").addEventListener("click", function(event
             address : document.getElementById('inputAddress').value,
             city : document.getElementById('ville').value,
             email : document.getElementById('Email').value
-        };
+            };
         //de même, je crée un tableau récupérant les données du localStorage
-        let produits = [];
+        let products = [];
         for (const [key, value] of Object.entries(localStorage)) {
-            let products = `${key}: ${value}`;
-            produits.push(products);
-            }
+            let produits = `${key}: ${value}`;
+            products.push(produits);
+            };
         //je crée une order_id qui sera renvoyé  au serveur et sur la page confirmation de commande
         let order_id = function () {
             return '_' + Math.random().toString(36).substr(2, 9);
-            }
-
+            };
         //j'ai plus qu'a poster mes trois élements au serveur (objets, tableau et order_id)
-
         event.preventDefault();
+            fetch("http://localhost:3000/api/teddies/order", {
+            method: "post",
+            body: JSON.stringify({information: contact, produits: products, order: order_id()}),
+            headers:{
+            'Accept': 'application/json', 
+            "Content-type": "application/json;charset=UTF-8"
+            }
+          })
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.log(err));
+            
+        
     }else{
         document.forms[0].reset();
         event.preventDefault();

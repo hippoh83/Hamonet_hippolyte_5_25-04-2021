@@ -97,6 +97,13 @@ let code = params.get('id');
            const li = document.createElement("li");
            li.className ='list-group-item mx-1 px-5 py-3 mt-2 border col-sm-1';
            li.style.backgroundColor= color;
+           //je recupere la valeur hex des deux couleurs non définis par css
+           if(color == "Pale brown"){
+            li.style.backgroundColor= "#987654";
+           }
+           if(color == "Dark brown"){
+            li.style.backgroundColor= "#654321";
+        }
            ul.append(li);
         }
 //une autre boucle pour ajouter un bouton de quantité  
