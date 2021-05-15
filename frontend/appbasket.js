@@ -22,13 +22,13 @@ for(let i = localStorage.length -1; i>=0; i--){
    let quantité = parseInt(`${objects.quantité}`, 10);
    let prix = parseInt(`${objects.prix}`, 10);
    let nom = `${objects.nom}`;
-   let id = objects.id;
+   let productId = objects.productId;
 
    //j'ajoute mes données
    tdname.innerHTML =`${nom}`;
    tdquantity.innerHTML =`${quantité}`;
    tdprice.innerHTML =`${prix}`+" "+"€";
-   button.setAttribute("value", id);
+   button.setAttribute("value", productId);
    button.append(icon);
    
 //j'ajoute les données
@@ -46,7 +46,6 @@ for(let i = 0; i<localStorage.length; i++){
  }
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const total = prixtotal.reduce(reducer, 0);
-
 let affichageprix = document.createElement("tr");
 affichageprix.className="border";
 let tdprixt = document.createElement("td");
@@ -118,49 +117,33 @@ function validation(){
 
 //j'ajoute les fonctionnalité quand on appuie sur le bouton commander(validation + envoie des données sous forme de tableau et objets+
 //+envoie sur la page confirmation de la commande)
+
 document.querySelector(".submitbutton").addEventListener("click", function(event){
 
-    if(validation() === true){
+    if(validation() === true && localStorage.length!= 0){
         //si la validation est validée, je crée un objet contenant les élements utilisateurs
-        let contact = {
-            firstName : document.getElementById('prénom').value,
-            lastName : document.getElementById('Nom').value,
-            address : document.getElementById('inputAddress').value,
-            city : document.getElementById('ville').value,
-            email : document.getElementById('Email').value
-            };
-        //de même, je crée un tableau récupérant les données du localStorage
-        let products = [];
-        for (const [key, value] of Object.entries(localStorage)) {
-            let produits = `${key}: ${value}`;
-            products.push(produits);
-            };
-        //je crée une order_id qui sera renvoyé  au serveur et sur la page confirmation de commande
-        let order_id = function () {
-            return '_' + Math.random().toString(36).substr(2, 9);
-            };
         //j'ai plus qu'a poster mes trois élements au serveur (objets, tableau et order_id)
-        function send(){
-            fetch("http://localhost:3000/api/teddies/order", {
-            method: "POST",
-            headers:{
-                "accept": "application/json",
-                "Content-type": "application/json"
-                },
-            body: JSON.stringify({contact : contact, products : products, orderID: order_id()})
-          })
-            .then(function(response){
-               console.log(response);
-               return response.json()
-            })
-            .catch(err => console.log(err))
-        }
-        send();
-        event.preventDefault();
-        
-    }else{
+            let contact = {
+                firstName : document.getElementById('prénom').value,
+                lastName : document.getElementById('Nom').value,
+                address : document.getElementById('inputAddress').value,
+                city : document.getElementById('ville').value,
+                email : document.getElementById('Email').value
+                };
+            localStorage.setItem("contact", JSON.stringify(contact));
+            localStorage.setItem("total", total);
+            
+            //de même, je crée un tableau récupérant les données du localStorage
+    }if(validation() == false){
         document.forms[0].reset();
         event.preventDefault();
+    }if(localStorage.length == 0){
+        event.preventDefault();
+        let table = document.querySelector(".table");
+        let  errormsg = document.createElement("small");
+        errormsg.className=" justify-content-center form-text text-danger";
+        errormsg.innerHTML="Votre panier est vide";
+        table.insertAdjacentElement('afterend', errormsg);
     }
     
 })

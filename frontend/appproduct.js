@@ -159,7 +159,7 @@ panier.innerHTML = "produit ajouté au panier !";
         nom : `${items.name}`,
         prix : `${newPrice}`,
         quantité : `${value}`,
-        id : `${items._id}`
+        productId : `${items._id}`
     }
     
     
