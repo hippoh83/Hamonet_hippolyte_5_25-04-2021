@@ -38,6 +38,7 @@ maincontainer.append(tr);
 
 }
 //ajout prix total panier
+
 let prixtotal =[];
 for(let i = 0; i<localStorage.length; i++){
     const objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
@@ -54,6 +55,7 @@ tdprixt.setAttribute("colspan", "4");
 tdprixt.innerHTML=`Prix total : ${total} €`;
 affichageprix.append(tdprixt)
 maincontainer.insertAdjacentElement('beforeend', affichageprix);    
+
 
 //j'ajoute une fonctionnalité pour supprimer les élements du panier
 

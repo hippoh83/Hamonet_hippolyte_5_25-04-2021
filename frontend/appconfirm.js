@@ -9,7 +9,7 @@
                     products.push(productId);
                 }
                 };
-                console.log(products);
+               
 
 
             fetch("http://localhost:3000/api/teddies/order", {

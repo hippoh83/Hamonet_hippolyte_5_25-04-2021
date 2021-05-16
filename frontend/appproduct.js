@@ -176,8 +176,6 @@ for(let i = 0; i<localStorage.length; i++){
    const objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
    const value = parseInt(`${objects.quantité}`, 10);
    quantités.push(value);
-   console.log(objects);
-
 }
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const quantitétotal = quantités.reduce(reducer, 0);
