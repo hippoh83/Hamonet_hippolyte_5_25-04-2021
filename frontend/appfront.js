@@ -58,10 +58,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 card.append(img, cardBody);
                 mainContainer.append(card);
 
-                //pour chaque élement de l'api (0 à 5), je crée une div avec les class card ou j'ajoute les élements contenu dans value
-                //j'ajoute d'abord les images en haut de la card
-                //j'ajoute ensuite tous les elements dans le cardbody
-                //je crée les élements qui seront contenus dans ma card avec leurs classe respectives et renvoyant a la valeur de q
+               
             }        
 
     }
@@ -97,7 +94,5 @@ function compteurPanier(){
 
 
 
-//une autre fonction qui ajoute le produit sélectionnée dans mon panier lorsqu'on appuie sur le bouton "ajouter au panier"
-// une fonction qui vérifie les informations rentrée dans les forms
-//une fonction qui valide la commande et qui retourne l'id de notre commande
+
 
