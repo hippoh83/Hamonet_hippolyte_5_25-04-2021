@@ -9,7 +9,7 @@
 }
 
 .jumbotron{
-    background-image: url("bear-1824882_1920.jpg");
+    background-image: url("./Image/bear-1824882_1920.jpg");
     background-size: cover;
     color: white;
     height:300px;
