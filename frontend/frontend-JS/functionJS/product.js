@@ -1,7 +1,7 @@
 function product(items){
     const mainProduct = document.querySelector("#product");
 
-//je crée les élements necessaires
+    //je crée les élements necessaires
 
     const img = document.createElement("img");
     const card = document.createElement("div");
@@ -28,7 +28,7 @@ function product(items){
     panierselect.append(compteur);
 
 
-//..j'ajoute toutes les classes bootstraps
+    //..j'ajoute toutes les classes bootstraps
 
     img.className = 'card-img mx-0 ';
     card.className = 'card mt-3 col-sm-12 px-0 bg-light shadow mt-5';
@@ -48,7 +48,7 @@ function product(items){
     form.className = 'form-control col-sm-3 mx-2';
     form.setAttribute('type', 'select');
     select.setAttribute('selected', '');
-//..puis les bonne valeurs
+    //..puis les bonne valeurs
 
 
     img.src = items.imageUrl;
@@ -60,35 +60,35 @@ function product(items){
     panier.innerHTML= "ajouter au panier";
     span.innerHTML = ((items.price)/100)+',00' + " ";
     select.innerHTML = "Quantité";
-//je crée une boucle qui crée automatiquement les bonnes couleurs
+    //je crée une boucle qui crée automatiquement les bonnes couleurs
 
 
     for(let i = 0; i<items.colors.length; i++){
-       const color=items.colors[i];
-       const li = document.createElement("li");
-       li.className ='list-group-item mx-1 px-5 py-3 mt-2 border col-sm-1';
-       li.style.backgroundColor= color;
-       //je recupere la valeur hex des deux couleurs non définis par css
-       if(color == "Pale brown"){
+        const color=items.colors[i];
+        const li = document.createElement("li");
+        li.className ='list-group-item mx-1 px-5 py-3 mt-2 border col-sm-1';
+        li.style.backgroundColor= color;
+        //je recupere la valeur hex des deux couleurs non définis par css
+        if(color == "Pale brown"){
         li.style.backgroundColor= "#987654";
-       }
-       if(color == "Dark brown"){
+        }
+        if(color == "Dark brown"){
         li.style.backgroundColor= "#654321";
+        }
+        ul.append(li);
     }
-       ul.append(li);
-    }
-//une autre boucle pour ajouter un bouton de quantité  
+    //une autre boucle pour ajouter un bouton de quantité  
     form.append(select);
 
     for(let i = 1; i<=10; i++){
-       const option = document.createElement('option');
-       option.setAttribute('value',`${i}`);
-       option.innerHTML =`${i}`;
-       form.append(option);
+        const option = document.createElement('option');
+        option.setAttribute('value',`${i}`);
+        option.innerHTML =`${i}`;
+        form.append(option);
     }
 
 
-//j'ajoute tous les élements entre eux pour créer la card
+    //j'ajoute tous les élements entre eux pour créer la card
 
     span.append(euros);
     price.append(span);
@@ -99,46 +99,35 @@ function product(items){
     containerCard.append(containerImg, containerbody);
     card.append(containerCard);
     mainProduct.append(card);   
-    
 
 
-//je crée un addeventlistener qui change le prix en fonction de la quantité selectionnée
 
-window.addEventListener('input',function(event){
-const value = event.target.value;
-const newPrice= span.innerHTML = ((items.price)/100)*value+',00' + " ";
-span.append(euros);
-//si la valeur sélectionnée est égale à "quantité", le prix renvoyé est le prix par défaut
-if(value === "Quantité"){
-     span.innerHTML = ((items.price)/100)+',00' + " ";
-     span.append(euros); 
+    //je crée un addeventlistener qui change le prix en fonction de la quantité selectionnée
+
+    window.addEventListener('input',function(event){
+        const value = event.target.value;
+        const newPrice= span.innerHTML = ((items.price)/100)*value+',00' + " ";
+        span.append(euros);
+    //si la valeur sélectionnée est égale à "quantité", le prix renvoyé est le prix par défaut
+        if(value === "Quantité"){
+            span.innerHTML = ((items.price)/100)+',00' + " ";
+            span.append(euros); 
+        }
+
+
+        document.querySelector('.btn').addEventListener('click', function(){
+            //avec cet addeventlistener, quand on clique sur le bouton ajouter au panier, ce dernier change de couleur..
+            panier.className = "btn btn-success mx-0";
+            panier.innerHTML = "produit ajouté au panier !";
+            //et ajoute le produits avec tous les élements ci dessous dans le localStorage
+            productinfo = {
+                nom : `${items.name}`,
+                prix : `${newPrice}`,
+                quantité : `${value}`,
+                productId : `${items._id}`
+            }
+            localStorage.setItem(`${items._id}`, JSON.stringify(productinfo));
+        })
+    return newPrice;
+    })
 }
-
-
-document.querySelector('.btn').addEventListener('click', function(){
-
-//avec cet addeventlistener, quand on clique sur le bouton ajouter au panier, ce dernier change de couleur..
-panier.className = "btn btn-success mx-0";
-panier.innerHTML = "produit ajouté au panier !";
-
-
-//et ajoute le produits avec tous les élements ci dessous dans le localStorage
-productinfo = {
-    nom : `${items.name}`,
-    prix : `${newPrice}`,
-    quantité : `${value}`,
-    productId : `${items._id}`
-}
-
-
-
-localStorage.setItem(`${items._id}`, JSON.stringify(productinfo));
-
-
-})
-
-return newPrice;
-
-
-} )
-  }

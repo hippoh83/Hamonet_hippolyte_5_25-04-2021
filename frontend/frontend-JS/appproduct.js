@@ -1,9 +1,8 @@
-
 //je recupere l'id dans l'url
 let params = new URLSearchParams(document.location.search);
 let code = params.get('id');
 //fetch des bonnes valeurs avec l'ajout de l'id
- function productdata(){
+function productdata(){
     fetch(`http://localhost:3000/api/teddies/${code}`)
     .then(function(res){
         if(res.ok){
@@ -18,5 +17,5 @@ let code = params.get('id');
     }) 
 }
 //j'appel la fonction
-      productdata();
+productdata();
 

@@ -5,8 +5,8 @@ for(let i = 0; i<localStorage.length; i++){
     const objects = JSON.parse(localStorage.getItem(localStorage.key(i)));
     const prixvalue = parseInt(`${objects.prix}`, 10);
     prixtotal.push(prixvalue);
- }
- //j'utilise la méthode reducer pour additionner les élements du tableau entre eux, puis j'ajoute les élements à mon affichage panier. 
+}
+//j'utilise la méthode reducer pour additionner les élements du tableau entre eux, puis j'ajoute les élements à mon affichage panier. 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const total = prixtotal.reduce(reducer, 0);
 let affichageprix = document.createElement("tr");

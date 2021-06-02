@@ -1,5 +1,4 @@
 //je crée une fonction qui sert de validation pour m'assurer que chaque entrée est correcte
-
 function validation(){
     //je créee les variables contenants les regex correspondants à chaque input utilisateurs. 
     let regPrenom = /[^A-Za-zÀ-ȕ-]/g.test(document.querySelector('#prénom').value);

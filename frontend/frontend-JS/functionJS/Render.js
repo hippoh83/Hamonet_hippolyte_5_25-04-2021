@@ -35,8 +35,6 @@ function render(products){
         cardBody.append(header, hr, paragraph, hr, price);
         card.append(img, cardBody);
         mainContainer.append(card);
-
-       
     }        
 
 }

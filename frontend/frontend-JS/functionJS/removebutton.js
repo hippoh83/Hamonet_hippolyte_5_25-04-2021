@@ -4,9 +4,9 @@ for(let i = 0; i<removeButton.length; i++){
     removeButton[i].addEventListener('click', () => {
         //je récupère l'id ajouté à mon bouton, correspondant à l'id du produit en question, pour l'ajouter en paramètre removeitem() du localStorage
         //et m'assurer qu'il supprime bien le bon produit. 
-    const ids = removeButton[i].getAttribute("value");
-    let tr = removeButton[i].parentNode.parentNode;
-    tr.remove();
-    localStorage.removeItem(ids);
-})
+        const ids = removeButton[i].getAttribute("value");
+        let tr = removeButton[i].parentNode.parentNode;
+        tr.remove();
+        localStorage.removeItem(ids);
+    })
 }
