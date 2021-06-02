@@ -1,13 +1,15 @@
 //je crée une fonction qui sert de validation pour m'assurer que chaque entrée est correcte
 
 function validation(){
-    
+    //je créee les variables contenants les regex correspondants à chaque input utilisateurs. 
     let regPrenom = /[^A-Za-zÀ-ȕ-]/g.test(document.querySelector('#prénom').value);
     let regNom = /[^A-Za-zÀ-ȕ-]/g.test(document.querySelector('#Nom').value);
     let regAddress= /[^A-Za-zÀ-ȕ0-9-'\s]/g.test(document.querySelector('#inputAddress').value);
     let regVille=  /[^A-Za-zÀ-ȕ0-9-\s]/g.test(document.querySelector('#ville').value);
     let regEmail = !(/^.+@.+\..+$/.test(document.querySelector('#Email').value));
    
+
+    //je crée les réponses pour chaque input au cas où les renseignements rentrées sont incorrects. 
     if(regPrenom){
         let  errormsg = document.createElement("small");
         errormsg.className="form-text text-danger";
@@ -43,6 +45,8 @@ function validation(){
         document.querySelector('#Email').className="form-control border-danger text-danger";
         document.querySelector('#Email').insertAdjacentElement('afterend', errormsg);
     }
+    //je return ces valeurs pour m'assurer que la fonction marchera, si un seul est faux, on renvoie un message d'erreur à celui qui est faux.
+    //et on ne renvoie pas sur la page confirmation. 
      return !(regPrenom||regVille||regAddress||regEmail||regNom);
 }
 
@@ -52,8 +56,7 @@ function validation(){
 document.querySelector(".submitbutton").addEventListener("click", function(event){
 
     if(validation() === true && localStorage.length!= 0){
-        //si la validation est validée, je crée un objet contenant les élements utilisateurs
-        //j'ai plus qu'a poster mes trois élements au serveur (objets, tableau et order_id)
+        //si la validation est validée, je crée un objet contenant les élements utilisateurs, et je renvoie à la page confirmation
             let contact = {
                 firstName : document.getElementById('prénom').value,
                 lastName : document.getElementById('Nom').value,
@@ -64,7 +67,7 @@ document.querySelector(".submitbutton").addEventListener("click", function(event
             localStorage.setItem("contact", JSON.stringify(contact));
             localStorage.setItem("total", total);
             
-            //de même, je crée un tableau récupérant les données du localStorage
+        //si la validation est fausse ou que le panier est vide, je renvoie un message d'erreur et j'empêche l'action. 
     }if(validation() == false){
         document.forms[0].reset();
         event.preventDefault();

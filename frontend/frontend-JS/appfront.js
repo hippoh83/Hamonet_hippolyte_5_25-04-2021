@@ -1,8 +1,8 @@
-//je récupère d'abord les données de l'api local
-//je crée une fonction qui crée dynamiquement les card au fur et à mesure qu'on ajoute un produit sur l'api:
+
+//je m'assure que les élements du DOM sont chargées avant de lancer le code. 
 document.addEventListener('DOMContentLoaded', ()=>{
 
-
+//je récupère d'abord les données de l'api local
   function fetchdata(){   
     fetch('http://localhost:3000/api/teddies')
     .then(function(res){
@@ -11,16 +11,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     })
     .then(function(products){
+//avec ces données, je crée les produits dynamiques grâce à la fonction render
         render(products);
     })
     .catch(function(err){
         console.log(err)
     })
   }
-        
+//j'appel la fonction   
 fetchdata();
 
-//ajout bouton panier montrant la valeur du panier dans la page d'accueil;
+
 
 })
 

@@ -1,5 +1,5 @@
-//je recupere les elements du local storage et je les places dans mon div basket
-//je recupere le container 
+
+//je recupere le container de mon panier
 let maincontainer = document.querySelector("#basket");
 
 
