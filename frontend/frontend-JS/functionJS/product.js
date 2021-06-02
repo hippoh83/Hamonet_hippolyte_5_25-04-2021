@@ -30,7 +30,6 @@ function product(items){
 
 //..j'ajoute toutes les classes bootstraps
 
-
     img.className = 'card-img mx-0 ';
     card.className = 'card mt-3 col-sm-12 px-0 bg-light shadow mt-5';
     cardBody.className = 'card-body text-center mt-4';
